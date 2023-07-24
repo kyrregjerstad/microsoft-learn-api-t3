@@ -1,5 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useInView } from "react-intersection-observer";
+import useAllModules from "~/lib/hooks/useAllModules";
 import APIClient from "~/lib/services/api-client";
 import type { Module } from "~/lib/types";
 
@@ -30,6 +32,14 @@ interface Props {
 }
 
 export default function Home({ initialModules }: Props) {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+
+  const { allModules } = useAllModules(initialModules, inView);
+
+  const modulesToRender = allModules || initialModules;
+
   return (
     <>
       <Head>
@@ -38,13 +48,16 @@ export default function Home({ initialModules }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {initialModules.map((module) => (
+        {modulesToRender.map((module) => (
           <div key={module.uid}>
             <h2>{module.title}</h2>
             <p>{module.summary}</p>
             <Link href={`/module/${module.uid}`}>View details</Link>
           </div>
         ))}
+        <p ref={ref} className="w-full p-12 text-center">
+          Loading...
+        </p>
       </main>
     </>
   );
