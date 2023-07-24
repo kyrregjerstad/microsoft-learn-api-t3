@@ -20,6 +20,13 @@ class APIClient {
     const res = await axiosInstance.get<FetchResponse>(this.endpoint);
     return res.data.modules;
   };
+
+  getSingle = async (uid: Module["uid"]) => {
+    const res = await axiosInstance.get<FetchResponse>(
+      this.endpoint + "?uid=" + uid
+    );
+    return res.data.modules[0];
+  };
 }
 
 export default APIClient;

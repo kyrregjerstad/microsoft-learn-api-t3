@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import APIClient from "~/lib/services/api-client";
 import type { Module } from "~/lib/types";
 
@@ -25,10 +26,10 @@ export async function getStaticProps() {
 }
 
 interface Props {
-  modules: Module[];
+  initialModules: Module[];
 }
 
-export default function Home({ modules }: Props) {
+export default function Home({ initialModules }: Props) {
   return (
     <>
       <Head>
@@ -37,10 +38,11 @@ export default function Home({ modules }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {modules.map((module) => (
+        {initialModules.map((module) => (
           <div key={module.uid}>
             <h2>{module.title}</h2>
             <p>{module.summary}</p>
+            <Link href={`/module/${module.uid}`}>View details</Link>
           </div>
         ))}
       </main>
