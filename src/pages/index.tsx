@@ -20,6 +20,8 @@ const apiClient = new APIClient("/catalog");
 export async function getStaticProps() {
   try {
     const initialModules = (await apiClient.getAll()).slice(0, 70);
+    // Added a hard limit to the amount of data displayed on static generation to 70, as the API returns 1000+ modules
+    // This is to prevent the initial load from being too slow
 
     return {
       props: {
@@ -47,9 +49,19 @@ export default function Home({ initialModules }: Props) {
     threshold: 0,
   });
 
-  const { allModules } = useAllModules(initialModules, inView);
+  const { allModules, error } = useAllModules(initialModules, inView);
 
   const modulesToRender = allModules || initialModules;
+
+  if (error) {
+    console.error(error);
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center text-white">
+        <h1 className="text-2xl font-bold sm:text-4xl">Error</h1>
+        <p className="text-xl">There was an error getting new data</p>
+      </div>
+    );
+  }
 
   return (
     <>
