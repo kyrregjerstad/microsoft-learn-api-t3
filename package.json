@@ -13,10 +13,15 @@
     "@tanstack/react-query": "^4.32.0",
     "@tanstack/react-query-devtools": "^4.32.0",
     "axios": "^1.4.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.263.0",
     "next": "^13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "^9.5.2",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.6",
     "zod": "^3.21.4"
   },
   "devDependencies": {
