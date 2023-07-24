@@ -59,6 +59,9 @@ export default function Home({ initialModules }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <h1 className="mt-12 text-center text-6xl font-bold tracking-tight text-white">
+          Microsoft Learn
+        </h1>
         <div className="mt-12 flex w-full max-w-full flex-wrap justify-center gap-5">
           {modulesToRender.map((module) => (
             <Card
