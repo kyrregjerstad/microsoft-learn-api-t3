@@ -33,6 +33,7 @@ interface Props {
 
 export default function Home({ initialModules }: Props) {
   const { ref, inView } = useInView({
+    rootMargin: "200px",
     threshold: 0,
   });
 
