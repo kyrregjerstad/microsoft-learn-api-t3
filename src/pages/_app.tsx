@@ -7,7 +7,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <div className="dark flex min-h-screen w-full flex-col items-center justify-center bg-background">
+        <div className="w-full max-w-7xl px-4">
+          <Component {...pageProps} />
+        </div>
+      </div>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
