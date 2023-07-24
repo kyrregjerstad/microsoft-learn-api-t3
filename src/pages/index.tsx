@@ -1,6 +1,16 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { useInView } from "react-intersection-observer";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
+
 import useAllModules from "~/lib/hooks/useAllModules";
 import APIClient from "~/lib/services/api-client";
 import type { Module } from "~/lib/types";
@@ -49,13 +59,32 @@ export default function Home({ initialModules }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {modulesToRender.map((module) => (
-          <div key={module.uid}>
-            <h2>{module.title}</h2>
-            <p>{module.summary}</p>
-            <Link href={`/module/${module.uid}`}>View details</Link>
-          </div>
-        ))}
+        <div className="mt-12 flex w-full max-w-full flex-wrap justify-center gap-5">
+          {modulesToRender.map((module) => (
+            <Card
+              key={module.uid}
+              className="flex w-[350px] flex-col items-center justify-between text-center"
+            >
+              <CardHeader className="flex w-full items-center justify-center gap-3">
+                <Image
+                  src={module.icon_url}
+                  width={60}
+                  height={60}
+                  alt={module.title + " icon"}
+                />
+                <CardTitle>{module.title}</CardTitle>
+                <CardDescription className="line-clamp-3">
+                  {module.summary}
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="flex justify-between">
+                <Button className="px-8">
+                  <Link href={"/module/" + module.uid}>View</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
         <p ref={ref} className="w-full p-12 text-center">
           Loading...
         </p>
