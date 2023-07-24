@@ -5,13 +5,23 @@ import type { Module } from "~/lib/types";
 const apiClient = new APIClient("/catalog");
 
 export async function getStaticProps() {
-  const modules = await apiClient.getAll();
+  try {
+    const initialModules = (await apiClient.getAll()).slice(0, 70);
 
-  return {
-    props: {
-      modules,
-    },
-  };
+    return {
+      props: {
+        initialModules,
+      },
+      revalidate: 60 * 60 * 12, // 12 hours
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {
+        initialModules: [],
+      },
+    };
+  }
 }
 
 interface Props {
