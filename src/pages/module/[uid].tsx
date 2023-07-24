@@ -28,13 +28,14 @@ interface Props {
 const DetailsRoute = ({ moduleDetails }: Props) => {
   return (
     <>
-      <div className="mt-12 flex min-h-screen flex-col gap-12 text-foreground">
+      <div className="my-12 flex min-h-screen flex-col gap-12 text-foreground">
         <div className="relative flex w-full flex-col items-center gap-6 sm:flex-row">
           <Image
             src={moduleDetails.icon_url}
             width={250}
             height={250}
             alt={moduleDetails.title}
+            className="w-48 sm:w-64"
           />
           <div className="bottom-0 flex flex-col items-center justify-center gap-5 p-4 sm:items-start">
             <h1 className="items-center text-center text-2xl font-bold sm:text-left sm:text-4xl">
